@@ -20,6 +20,8 @@ public class PropertiesUtil {
     static {
         String fileName = "mmall.properties";
         props = new Properties();
+
+
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
         } catch (IOException e) {
@@ -45,5 +47,9 @@ public class PropertiesUtil {
     }
 
 
+    public static void main(String[] args) {
+        getProperty("password.salt");
+
+    }
 
 }
