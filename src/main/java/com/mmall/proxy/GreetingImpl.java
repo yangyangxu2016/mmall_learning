@@ -8,13 +8,17 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class GreetingImpl implements Greeting {
+
+
+
     @Override
     public void sayHello(String name) {
-        before();
+//        before();
         System.out.println("Hello! " + name);
-        after();
-    }
+//        throw new RuntimeException("Error"); // 故意抛出一个异常，看看异常信息能否被拦截到
+//        after();
 
+    }
 
     private void before() {
         System.out.println("写死在代码中的  Before ");

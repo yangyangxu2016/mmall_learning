@@ -44,8 +44,8 @@ public class Client {
 
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-applicationContext.xml");
-        Greeting greeting = (Greeting) context.getBean("greetingProxy");
-        greeting.sayHello("java");
+//        Greeting greeting = (Greeting) context.getBean("greetingProxy");
+//        greeting.sayHello("java");
 
 
     }
