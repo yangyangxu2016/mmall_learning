@@ -27,7 +27,7 @@ public class GreetingProxy implements Greeting {
 
     }
 
-
+//
     private void before() {
         System.out.println("直接使用代理的  Before");
     }

@@ -2,11 +2,13 @@ package com.mmall.proxy;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.stereotype.Component;
 
 /**
  * @author xyy
  * @create 2017-09-11 10:44
  **/
+@Component
 public class GreetingAroundAdvice implements MethodInterceptor {
 
 
