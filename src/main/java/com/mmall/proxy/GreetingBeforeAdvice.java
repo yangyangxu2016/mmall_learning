@@ -13,7 +13,7 @@ public class GreetingBeforeAdvice implements MethodBeforeAdvice {
 
     @Override
     public void before(Method method, Object[] objects, Object o) throws Throwable {
-        System.out.println("brfore");
+        System.out.println("使用AOP编程式的  brfore");
 
     }
 }

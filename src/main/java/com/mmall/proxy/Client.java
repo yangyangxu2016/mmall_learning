@@ -1,7 +1,5 @@
 package com.mmall.proxy;
 
-import com.mmall.service.IUserService;
-import com.mmall.service.impl.UserServiceImpl;
 import org.springframework.aop.framework.ProxyFactory;
 
 /**
@@ -13,28 +11,35 @@ public class Client {
 
     public static void main(String[] args) {
 
+
 //          直接使用代理
-//        IUserServiceProxy userServiceProxy = new IUserServiceProxy(new UserServiceImpl()
-//        );
-//        userServiceProxy.selectQuestion("");
-//
+//        Greeting greetingProxy = new GreetingProxy(new GreetingImpl());
+//        greetingProxy.sayHello("Jack");
+
 
 //        使用JDK动态代理
-//        IUserService iUserService = new JDKDynamicProxy(new UserServiceImpl()).getProxy();
-//        iUserService.selectQuestion("");
+//        Greeting greeting = new JDKDynamicProxy(new GreetingImpl()).getProxy();
+//        greeting.sayHello("jack");
 
 
 //      使用CGLib动态地理
-//        IUserService iUserService1 = CGLibDynamicProxy.getInstance().getProxy(UserServiceImpl.class);
-//        iUserService1.selectQuestion("");
+//        Greeting greeting = CGLibDynamicProxy.getInstance().getProxy(GreetingImpl.class);
+//        greeting.sayHello("jack");
 
-//        使用AOP,编程式
+
+//        使用AOP编程式
         ProxyFactory proxyFactory = new ProxyFactory();//创建代理工厂
-        proxyFactory.setTarget(new UserServiceImpl());//射入目标类对象
+        proxyFactory.setTarget(new GreetingImpl());//射入目标类对象
         proxyFactory.addAdvice(new GreetingBeforeAdvice());//添加前置增强
+        proxyFactory.addAdvice(new GreetingAfterAdvice());  // 添加后置增强
 
-        IUserService iUserService2 = (IUserService) proxyFactory.getProxy();// 从代理工厂中获取代理
-        iUserService2.selectQuestion("");// 调用代理的方法
+        proxyFactory.addAdvice(new GreetingBeforeAndAfterAdvice());  // 添加前置和后置增强
+
+        proxyFactory.addAdvice(new GreetingAroundAdvice()); //环绕增强
+
+
+        Greeting greeting = (Greeting) proxyFactory.getProxy(); // 从代理工厂中获取代理        iUserService2.selectQuestion("");// 调用代理的方法
+        greeting.sayHello("Jack");                              // 调用代理的方法
 
 
 

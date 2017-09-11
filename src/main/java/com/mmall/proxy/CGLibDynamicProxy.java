@@ -43,10 +43,10 @@ public class CGLibDynamicProxy implements MethodInterceptor {
 
 
     private void before() {
-        System.out.println("Before");
+        System.out.println("使用CGLib动态代理的  Before");
     }
 
     private void after() {
-        System.out.println("After");
+        System.out.println("使用CGLib动态代理的  After");
     }
 }
