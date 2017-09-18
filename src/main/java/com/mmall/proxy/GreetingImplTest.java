@@ -15,14 +15,15 @@ public class GreetingImplTest {
 
 
     @Resource
-    private GreetingImpl greeting;
+    private  GreetingImpl1 greeting;
 
     @org.junit.Test
     public void testSayHello() throws Exception {
 
 
-        greeting.sayHello("java" +
-                "");
+        greeting. sayHello1("java" + "");
+
+
 
 
     }

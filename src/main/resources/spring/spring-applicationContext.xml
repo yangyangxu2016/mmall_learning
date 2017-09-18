@@ -11,7 +11,8 @@
 
 
 
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
 
 
     <!--<context:annotation-config/>-->
@@ -27,15 +28,15 @@
     <!--</bean>-->
 
 
-    <bean id="greetingImpl" class="com.mmall.proxy.GreetingImpl"/>
+    <!--<bean id="greetingImpl" class="com.mmall.proxy.GreetingImpl"/>-->
 
-    <bean id="greetingAspect" class="com.mmall.proxy.GreetingAspect"/>
+    <!--<bean id="greetingAspect" class="com.mmall.proxy.GreetingAspect"/>-->
 
-    <aop:config>
-        <aop:aspect ref="greetingAspect">
-            <aop:around method="around" pointcut="execution(* com.mmall.proxy.GreetingImpl.*(..))"/>
-        </aop:aspect>
-    </aop:config>
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="greetingAspect">-->
+            <!--<aop:around method="around" pointcut="execution(* com.mmall.proxy.GreetingImpl.*(..))"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
 
 
     <import resource="classpath:spring/spring-datasource.xml"/>

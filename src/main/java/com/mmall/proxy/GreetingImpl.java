@@ -1,5 +1,6 @@
 package com.mmall.proxy;
 
+import com.mmall.common.ResultBean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,21 +11,16 @@ import org.springframework.stereotype.Component;
 public class GreetingImpl implements Greeting {
 
 
-
-    @Override
-    public void sayHello(String name) {
-//        before();
-        System.out.println("Hello! " + name);
-//        throw new RuntimeException("Error"); // 故意抛出一个异常，看看异常信息能否被拦截到
-//        after();
-
-    }
-
     private void before() {
         System.out.println("写死在代码中的  Before ");
     }
 
     private void after() {
         System.out.println("写死在代码中的  After");
+    }
+
+    @Override
+    public void sayHello(String name) {
+        System.out.println("Hello! " + name);
     }
 }

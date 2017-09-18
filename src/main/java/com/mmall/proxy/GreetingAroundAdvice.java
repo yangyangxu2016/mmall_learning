@@ -2,6 +2,7 @@ package com.mmall.proxy;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class GreetingAroundAdvice implements MethodInterceptor {
+
+
 
 
 

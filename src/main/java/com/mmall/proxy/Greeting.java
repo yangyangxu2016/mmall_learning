@@ -5,6 +5,6 @@ package com.mmall.proxy;
  */
 public interface Greeting {
 
-    void sayHello(String name);
+    void   sayHello(String name);
 
 }

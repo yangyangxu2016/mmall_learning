@@ -1,6 +1,7 @@
 package com.mmall.controller.backend;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResultBean;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -39,4 +40,13 @@ public class UserManageController {
         }
         return response;
     }
+
+
+    @RequestMapping(value = "/hello.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean<Boolean> hello() {
+        return new ResultBean<Boolean>( iUserService.hello());
+
+    }
+
 }
