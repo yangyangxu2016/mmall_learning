@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 前台用户
+ *
  * @author xyy
  * @create 2017-07-31 10:16
  **/
