@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 后台用户
+ *
  * @author xyy
  * @create 2017-08-01 9:47
  **/
@@ -24,17 +26,17 @@ public class UserManageController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping(value="login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> login(String username, String password, HttpSession session){
-        ServerResponse<User> response = iUserService.login(username,password);
-        if(response.isSuccess()){
+    public ServerResponse<User> login(String username, String password, HttpSession session) {
+        ServerResponse<User> response = iUserService.login(username, password);
+        if (response.isSuccess()) {
             User user = response.getData();
-            if(user.getRole() == Const.Role.ROLE_ADMIN){
+            if (user.getRole() == Const.Role.ROLE_ADMIN) {
                 //说明登录的是管理员
-                session.setAttribute(Const.CURRENT_USER,user);
+                session.setAttribute(Const.CURRENT_USER, user);
                 return response;
-            }else{
+            } else {
                 return ServerResponse.createByErrorMessage("不是管理员,无法登录");
             }
         }
@@ -45,7 +47,7 @@ public class UserManageController {
     @RequestMapping(value = "/hello.do", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean<Boolean> hello() {
-        return new ResultBean<Boolean>( iUserService.hello());
+        return new ResultBean<Boolean>(iUserService.hello());
 
     }
 
