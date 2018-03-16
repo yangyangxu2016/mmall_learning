@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GreetingImpl1 implements Greeting1 {
 
+    @Override
     public ResultBean<Boolean> sayHello1(String name) {
 //        before();
 
