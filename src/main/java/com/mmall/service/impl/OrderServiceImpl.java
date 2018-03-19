@@ -218,6 +218,7 @@ public class OrderServiceImpl implements IOrderService {
             return serverResponse;
         }
         List<OrderItem> orderItemList = (List<OrderItem>) serverResponse.getData();
+        //计算总价
         BigDecimal payment = this.getOrderTotalPrice(orderItemList);
 
 
@@ -366,6 +367,13 @@ public class OrderServiceImpl implements IOrderService {
         return orderVo;
     }
 
+
+    /**
+     * 订单条目转VO对象
+     *
+     * @param orderItem
+     * @return
+     */
     private OrderItemVo assembleOrderItemVo(OrderItem orderItem) {
         OrderItemVo orderItemVo = new OrderItemVo();
         orderItemVo.setOrderNo(orderItem.getOrderNo());
@@ -408,6 +416,14 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
+    /**
+     * 组装订单
+     *
+     * @param userId
+     * @param shippingId
+     * @param payment
+     * @return
+     */
     private Order assembleOrder(Integer userId, Integer shippingId, BigDecimal payment) {
 
         Order order = new Order();
@@ -428,11 +444,24 @@ public class OrderServiceImpl implements IOrderService {
         return null;
     }
 
+    /**
+     * 生成订单号，先简单生成，下一步在说，这是很重要，并发问题
+     *
+     * @return
+     */
     private long generateOrderNo() {
         long currentTime = System.currentTimeMillis();
         return currentTime + new Random().nextInt(100);
+
     }
 
+
+    /**
+     * 计算订单总价
+     *
+     * @param orderItemList
+     * @return
+     */
     private BigDecimal getOrderTotalPrice(List<OrderItem> orderItemList) {
 
         BigDecimal payment = new BigDecimal("0");
@@ -445,11 +474,19 @@ public class OrderServiceImpl implements IOrderService {
 
     }
 
+    /**
+     * 把购物车选中的数据，生成订单条目，判断是否在售卖状态，校验库存，计算总价，
+     *
+     * @param userId
+     * @param cartList
+     * @return
+     */
     private ServerResponse getCartOrderItem(Integer userId, List<Cart> cartList) {
-        List<OrderItem> orderItemList = Lists.newArrayList();
         if (CollectionUtils.isEmpty(cartList)) {
             return ServerResponse.createByErrorMessage("购物车为空");
         }
+
+        List<OrderItem> orderItemList = Lists.newArrayList();
         for (Cart cartItem : cartList) {
             OrderItem orderItem = new OrderItem();
             Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
@@ -460,12 +497,13 @@ public class OrderServiceImpl implements IOrderService {
             if (cartItem.getQuantity() > product.getStock()) {
                 return ServerResponse.createByErrorMessage("产品" + product.getName() + "库存不足");
             }
+            //组装订单条目
             orderItem.setUserId(userId);
             orderItem.setProductId(product.getId());
             orderItem.setProductName(product.getName());
             orderItem.setProductImage(product.getMainImage());
             orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(), cartItem.getQuantity()));
+            orderItem.setTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(), cartItem.getQuantity()));//计算总价
             orderItemList.add(orderItem);
 
         }
@@ -547,13 +585,13 @@ public class OrderServiceImpl implements IOrderService {
         String tradeNo = params.get("trade_no");
         String tradeStatus = params.get("trade_status");
         Order order = orderMapper.selectByOrderNo(orderNo);
-        if(order == null){
+        if (order == null) {
             return ServerResponse.createByErrorMessage("非快乐慕商城的订单,回调忽略");
         }
-        if(order.getStatus() >= Const.OrderStatusEnum.PAID.getCode()){
+        if (order.getStatus() >= Const.OrderStatusEnum.PAID.getCode()) {
             return ServerResponse.createBySuccess("支付宝重复调用");
         }
-        if(Const.AlipayCallback.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)){
+        if (Const.AlipayCallback.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)) {
             order.setPaymentTime(DateTimeUtil.strToDate(params.get("gmt_payment")));
             order.setStatus(Const.OrderStatusEnum.PAID.getCode());
             orderMapper.updateByPrimaryKeySelective(order);
