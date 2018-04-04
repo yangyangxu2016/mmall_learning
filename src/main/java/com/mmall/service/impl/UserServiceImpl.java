@@ -214,10 +214,7 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByError();
     }
 
-    @Override
-    public Boolean hello() {
-        return null;
-    }
+
 
 
 }

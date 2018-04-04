@@ -75,7 +75,7 @@ public class OrderServiceImpl implements IOrderService {
     private ProductMapper productMapper;
     @Autowired
     private ShippingMapper shippingMapper;
-
+    @Override
     public ServerResponse pay(Long orderNo, Integer userId, String path) {
         Map<String, String> resultMap = Maps.newHashMap();
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
@@ -504,7 +504,8 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createByErrorMessage("订单不存在");
     }
-    public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize){
+    @Override
+    public ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         Order order = orderMapper.selectByOrderNo(orderNo);
         if(order != null){

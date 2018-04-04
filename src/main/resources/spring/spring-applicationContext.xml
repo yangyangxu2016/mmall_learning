@@ -15,28 +15,7 @@
 
 
 
-    <!--<context:annotation-config/>-->
-    <!--<aop:aspectj-autoproxy/>-->
 
-
-    <!--<bean id="greetingProxy" class="org.springframework.aop.framework.ProxyFactoryBean">-->
-        <!--<property name="interfaces" value="com.mmall.proxy.Greeting"/>-->
-        <!--<property name="target" ref="greetingImpl"/>-->
-        <!--<property name="interceptorNames" value="greetingAroundAdvice"/>-->
-        <!--&lt;!&ndash;<property name="interceptorNames" value="greetingThrowAdvice"/>&ndash;&gt;-->
-
-    <!--</bean>-->
-
-
-    <!--<bean id="greetingImpl" class="com.mmall.proxy.GreetingImpl"/>-->
-
-    <!--<bean id="greetingAspect" class="com.mmall.proxy.GreetingAspect"/>-->
-
-    <!--<aop:config>-->
-        <!--<aop:aspect ref="greetingAspect">-->
-            <!--<aop:around method="around" pointcut="execution(* com.mmall.proxy.GreetingImpl.*(..))"/>-->
-        <!--</aop:aspect>-->
-    <!--</aop:config>-->
 
 
     <import resource="classpath:spring/spring-datasource.xml"/>

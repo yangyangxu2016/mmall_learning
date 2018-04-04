@@ -28,5 +28,4 @@ public interface IUserService {
 
     ServerResponse checkAdminRole(User user);
 
-    Boolean hello();
 }
