@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 前台商品
+ *
  * @author xyy
  * @create 2017-08-02 16:36
  **/
@@ -37,6 +39,15 @@ public class ProductController {
                                          @RequestParam(value = "orderBy", defaultValue = "") String orderBy) {
         return iProductService.getProductByKeywordCategory(keyword, categoryId, pageNum, pageSize, orderBy);
     }
+
+
+
+
+
+
+
+
+
 
 
 }

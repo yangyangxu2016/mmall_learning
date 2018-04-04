@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.mmall.common.ServerResponse;
 import com.mmall.vo.OrderVo;
 
+import java.util.Map;
+
 /**
  * @author xyy
  * @create 2017-08-17 11:17
@@ -30,4 +32,6 @@ public interface IOrderService {
     ServerResponse<OrderVo> manageDetail(Long orderNo);
     ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize);
     ServerResponse<String> manageSendGoods(Long orderNo);
+
+    ServerResponse aliCallback(Map<String, String> params);
 }
